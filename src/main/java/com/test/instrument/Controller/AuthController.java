@@ -1,7 +1,6 @@
 package com.test.instrument.Controller;
 
 import com.test.instrument.Metrics.*;
-import io.opentelemetry.api.metrics.MeterProvider;
 import io.prometheus.client.exporter.HTTPServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ public class AuthController {
 
     HTTPServer server = new HTTPServer(19090);
     KeyObserver keyObserver = new KeyObserver(server);
-    KeyCounter keyCounter = new KeyCounter(server);
+    KeyLongCounter keyLongCounter = new KeyLongCounter(server);
 
     public AuthController() throws IOException {
     }
@@ -36,7 +35,7 @@ public class AuthController {
          */
 
         keyObserver.incomingMessageCount = 1;
-        keyCounter.authWorkBound.add(1);
+        keyLongCounter.authWorkBound.add(1);
 
         /**
          * AIOps
