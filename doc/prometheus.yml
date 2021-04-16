@@ -1,0 +1,22 @@
+global:
+  scrape_interval:     60s
+  evaluation_interval: 60s
+ 
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          instance: prometheus
+ 
+  - job_name: linux
+    static_configs:
+      - targets: ['10.60.38.173:9100']
+        labels:
+          instance: localhost
+          
+  - job_name: auth
+    static_configs:
+      - targets: ['10.60.38.173:19090']
+        labels:
+          instance: auth
