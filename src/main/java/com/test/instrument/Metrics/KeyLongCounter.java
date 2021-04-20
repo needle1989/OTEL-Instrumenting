@@ -16,10 +16,10 @@ import io.prometheus.client.exporter.HTTPServer;
  */
 public final class KeyLongCounter {
     HTTPServer prometheusPort;
-    public final LongCounter directoryCounter;
+    public final LongCounter keyCounter;
     public final BoundLongCounter authWorkBound;
 
-    public KeyLongCounter(HTTPServer prometheusPort) {
+    public KeyLongCounter(HTTPServer prometheusPort, String work_name, String description, String unit) {
 
         SdkMeterProvider meterProvider = SdkMeterProvider.builder().buildAndRegisterGlobal();
 
@@ -28,7 +28,9 @@ public final class KeyLongCounter {
         this.prometheusPort = prometheusPort;
 
         Meter meter = meterProvider.get("PrometheusExample", "0.13.1");
-        directoryCounter = meter.longCounterBuilder("wtf").setDescription("wtf").setUnit("wtf").build();
-        authWorkBound = directoryCounter.bind(Labels.of("work_name","some_work"));
+        keyCounter = meter.longCounterBuilder(work_name).setDescription(description).setUnit(unit).build();
+        authWorkBound = keyCounter.bind(Labels.of("work_name",work_name));
     }
 }
+
+

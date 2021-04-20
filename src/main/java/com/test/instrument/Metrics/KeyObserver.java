@@ -18,10 +18,10 @@ import io.prometheus.client.exporter.HTTPServer;
  * @author Raven
  */
 public final class KeyObserver {
-    public long incomingMessageCount;
+    public long valueCount;
     HTTPServer prometheusPort;
 
-    public KeyObserver(HTTPServer prometheusPort) {
+    public KeyObserver(HTTPServer prometheusPort, String work_name, String desc, String unit) {
         SdkMeterProvider meterProvider = SdkMeterProvider.builder().buildAndRegisterGlobal();
 
         PrometheusCollector.builder().setMetricProducer(meterProvider).buildAndRegister();
@@ -30,10 +30,10 @@ public final class KeyObserver {
 
         Meter meter = meterProvider.get("PrometheusExample", "0.13.1");
         meter
-                .longValueObserverBuilder("incoming.messages")
-                .setDescription("No of incoming messages awaiting processing")
-                .setUnit("message")
-                .setUpdater(result -> result.observe(incomingMessageCount, Labels.empty()))
+                .longValueObserverBuilder(work_name)
+                .setDescription(desc)
+                .setUnit(unit)
+                .setUpdater(result -> result.observe(valueCount, Labels.empty()))
                 .build();
     }
 }

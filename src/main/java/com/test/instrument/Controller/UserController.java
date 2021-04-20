@@ -13,18 +13,18 @@ import java.io.IOException;
  * @author Raven
  */
 @RestController
-@RequestMapping("/v1")
-public class AuthController {
+@RequestMapping("/v2")
+public class UserController {
     /**
      * AIOps
      */
 
     HTTPServer server = InstrumentApplication.server;
-    KeyObserver keyObserver = new KeyObserver(server, "key", "this is a key num", "value");
-    KeyLongCounter keyLongCounter = new KeyLongCounter(server,"test", "this is for testing", "visit");
+    KeyLongCounter keyLongCounter = new KeyLongCounter(server,"user", "this is a test 2", "visit");
 
-    public AuthController() throws IOException {
+    public UserController() throws IOException {
     }
+
     /**
      * AIOps
      */
@@ -34,8 +34,7 @@ public class AuthController {
         /**
          * AIOps
          */
-
-        keyObserver.valueCount = 1;
+        
         keyLongCounter.authWorkBound.add(1);
 
         /**
