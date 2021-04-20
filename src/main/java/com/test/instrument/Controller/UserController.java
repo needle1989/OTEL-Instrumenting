@@ -34,7 +34,7 @@ public class UserController {
         /**
          * AIOps
          */
-        
+
         keyLongCounter.authWorkBound.add(1);
 
         /**
