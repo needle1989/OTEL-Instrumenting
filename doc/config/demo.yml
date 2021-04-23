@@ -1,0 +1,76 @@
+version: '3'
+services:
+
+  redis:
+    image: redis
+    ports:
+      - 1001:6379
+    networks:
+      - my-network
+
+  ts-ui-dashboard:
+    image: codewisdom/ts-ui-dashboard:0.0.4
+    restart: always
+    ports:
+      - 1002:8080
+    networks:
+      - my-network
+
+  ts-auth-service:
+    image: codewisdom/ts-auth-service:0.0.4
+    restart: always
+    ports:
+      - 12340:12340
+    networks:
+      - my-network
+
+  ts-auth-mongo:
+    image: mongo
+    ports:
+      - 11451:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: mongoadmin
+    networks:
+      - my-network
+
+  ts-user-service:
+    image: codewisdom/ts-user-service:0.0.4
+    restart: always
+    ports:
+      - 12342:12342
+    networks:
+      - my-network
+
+  ts-user-mongo:
+    image: mongo
+    networks:
+      - my-network
+
+  ts-account-mongo:
+    image: mongo
+    networks:
+      - my-network
+
+  ts-order-service:
+    image: codewisdom/ts-order-service:0.0.4
+    restart: always
+    ports:
+      - 12031:12031
+    networks:
+      - my-network
+
+  ts-order-mongo:
+    image: mongo
+    networks:
+      - my-network
+
+networks:
+    my-network:
+      # driver: overlay
+      driver: bridge
+
+
+
+
+
