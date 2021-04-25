@@ -9,7 +9,7 @@
 ## 0 Environment & Requirement
 
 * 本文档是基于[train-ticket](https://github.com/FudanSELab/train-ticket)这一微服务系统的metrics插桩文档
-* 本文档中的Metrics插桩基于[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-java/releases/tag/v1.1.0) Version1.1.0，截止2021.4.19为OTel的最新版本
+* 本文档中的Metrics插桩基于[OpenTelemetry](https://github.com/open-telemetry/opentelemetry-java/releases/tag/v1.1.0) Version1.1.0，截止2021.4.23为OTel的最新版本
 * train-ticket系统的部署环境为实验室10.60.38.173，通过docker部署train-ticket，由Prometheus (10.60.38.173:9090) 收集数据并通过Grafana (10.60.38.173:3002) 可视化
 * 所有相关配置文件、jar包及数据保存在173的AIOps中
 
@@ -33,6 +33,8 @@
             
     - job_name: authService
       static_configs:
+      
+      
         - targets: ['10.60.38.173:19091']
           labels:
             instance: auth
